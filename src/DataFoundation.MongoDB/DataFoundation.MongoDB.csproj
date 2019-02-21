@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Jeferson Tenorio</Authors>
+    <Company />
+    <Description>Foundation to access MongoDB</Description>
+    <Copyright></Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/jefersonsv/DataFoundation/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jefersonsv/DataFoundation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jefersonsv/DataFoundation</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageTags>foundation mongodb</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.7.3" />
+  </ItemGroup>
+
+</Project>
