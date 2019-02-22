@@ -6,7 +6,7 @@ namespace DataFoundation.Redis
     {
         private ConnectionMultiplexer redis;
 
-        public RedisConnection(string redisConnectionString, string password = null)
+        public RedisConnection(string redisConnectionString = null, string password = null)
         {
             if (string.IsNullOrEmpty(redisConnectionString))
                 redisConnectionString = "127.0.0.1:6379";
