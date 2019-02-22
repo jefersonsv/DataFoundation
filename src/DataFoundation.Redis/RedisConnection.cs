@@ -14,6 +14,15 @@ namespace DataFoundation.Redis
             ConfigurationOptions options = ConfigurationOptions.Parse(redisConnectionString);
             if (!string.IsNullOrEmpty(password))
                 options.Password = password;
+            else
+            {
+                // check for environment variables
+                var env = System.Environment.GetEnvironmentVariable("REDIS_PASSWORD");
+                if (!string.IsNullOrEmpty(env))
+                {
+                    options.Password = env;
+                }
+            }
 
             redis = ConnectionMultiplexer.Connect(options);
             DB = redis.GetDatabase();
