@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/jefersonsv/DataFoundation</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>foundation influxdb</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>
