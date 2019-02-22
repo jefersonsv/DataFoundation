@@ -6,12 +6,16 @@ namespace DataFoundation.Redis
     {
         private ConnectionMultiplexer redis;
 
-        public RedisConnection(string redisConnectionString)
+        public RedisConnection(string redisConnectionString, string password = null)
         {
             if (string.IsNullOrEmpty(redisConnectionString))
                 redisConnectionString = "127.0.0.1:6379";
 
-            redis = ConnectionMultiplexer.Connect(redisConnectionString);
+            ConfigurationOptions options = ConfigurationOptions.Parse(redisConnectionString);
+            if (!string.IsNullOrEmpty(password))
+                options.Password = password;
+
+            redis = ConnectionMultiplexer.Connect(options);
             DB = redis.GetDatabase();
         }
 
