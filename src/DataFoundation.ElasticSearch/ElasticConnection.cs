@@ -10,6 +10,7 @@ namespace DataFoundation.ElasticSearch
     {
         Uri node;
         string index;
+        string type;
 
         /// <summary>
         /// https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html
@@ -59,13 +60,14 @@ namespace DataFoundation.ElasticSearch
         //    this.index = index;
         //}
 
-        public ElasticConnection(string index, string elasticSearchConnectionString)
+        public ElasticConnection(string index, string elasticSearchConnectionString, string type = null)
         {
             node = new Uri(elasticSearchConnectionString);
             var config = new ConnectionConfiguration(node);
             LowClient = new ElasticLowLevelClient(config);
             HighClient = new ElasticClient(node);
             this.index = index;
+            this.type = type ?? index;
         }
 
         public void DeleteById(string id)
@@ -73,7 +75,7 @@ namespace DataFoundation.ElasticSearch
             var doc = new Nest
                 .DocumentPath<dynamic>(new Nest.Id(id))
                 .Index(this.index)
-                .Type(this.index);
+                .Type(this.type);
 
             Nest.IDeleteResponse resp = this.HighClient.Delete<dynamic>(doc);
         }
@@ -84,7 +86,7 @@ namespace DataFoundation.ElasticSearch
             var doc = new Nest
                 .DocumentPath<dynamic>(new Nest.Id(id))
                 .Index(this.index)
-                .Type(this.index);
+                .Type(this.type);
 
             Nest.IDeleteResponse resp = await this.HighClient.DeleteAsync<dynamic>(doc);
         }
@@ -93,7 +95,7 @@ namespace DataFoundation.ElasticSearch
         {
             var searchResponse = this.HighClient.Search<dynamic>(s => s
                     .Index(this.index)
-                    .Type(this.index)
+                    .Type(this.type)
                     .Size(limit)
                     .Query(q => q
                         .MatchAll()
@@ -118,7 +120,7 @@ namespace DataFoundation.ElasticSearch
         {
             var searchResponse = await this.HighClient.SearchAsync<dynamic>(s => s
                     .Index(this.index)
-                    .Type(this.index)
+                    .Type(this.type)
                     .Size(limit)
                     .Query(q => q
                         .MatchAll()
@@ -131,25 +133,25 @@ namespace DataFoundation.ElasticSearch
         public void Index(string id, string json)
         {
             PostData post = PostData.String(json);
-            var res = LowClient.Index<Elasticsearch.Net.StringResponse>(index, index, id, post);
+            var res = LowClient.Index<Elasticsearch.Net.StringResponse>(index, type, id, post);
         }
 
         public async Task<StringResponse> IndexAsync(string id, string json)
         {
             PostData post = PostData.String(json);
-            return await LowClient.IndexAsync<Elasticsearch.Net.StringResponse>(index, index, id, post);
+            return await LowClient.IndexAsync<Elasticsearch.Net.StringResponse>(index, type, id, post);
         }
 
         public void Index(string json)
         {
             PostData post = PostData.String(json);
-            var res = LowClient.Index<Elasticsearch.Net.StringResponse>(index, index, post);
+            var res = LowClient.Index<Elasticsearch.Net.StringResponse>(index, type, post);
         }
 
         public async Task<StringResponse> IndexAsync(string json)
         {
             PostData post = PostData.String(json);
-            return await LowClient.IndexAsync<Elasticsearch.Net.StringResponse>(index, index, post);
+            return await LowClient.IndexAsync<Elasticsearch.Net.StringResponse>(index, type, post);
         }
 
         
