@@ -6,7 +6,7 @@ namespace sample
     {
         static void Main(string[] args)
         {
-            DataFoundation.Redis.RedisConnection redis = new DataFoundation.Redis.RedisConnection();
+            var redis = new DataFoundation.Redis.RedisConnection();
             var somekey = redis.DB.StringGet("https:www:google:com");
 
             Console.WriteLine("Press any key to exit");

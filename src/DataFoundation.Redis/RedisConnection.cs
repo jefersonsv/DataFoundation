@@ -4,30 +4,20 @@ namespace DataFoundation.Redis
 {
     public class RedisConnection
     {
-        private ConnectionMultiplexer redis;
+        public readonly ConnectionMultiplexer Client;
+        public readonly IDatabase DB;
 
         public RedisConnection(string redisConnectionString = null, string password = null)
         {
-            if (string.IsNullOrEmpty(redisConnectionString))
-                redisConnectionString = "127.0.0.1:6379";
+            redisConnectionString = redisConnectionString ?? System.Environment.GetEnvironmentVariable("REDIS_SERVER") ?? "127.0.0.1";
+            password = password ?? System.Environment.GetEnvironmentVariable("REDIS_PASSWORD") ?? null;
 
             ConfigurationOptions options = ConfigurationOptions.Parse(redisConnectionString);
             if (!string.IsNullOrEmpty(password))
                 options.Password = password;
-            else
-            {
-                // check for environment variables
-                var env = System.Environment.GetEnvironmentVariable("REDIS_PASSWORD");
-                if (!string.IsNullOrEmpty(env))
-                {
-                    options.Password = env;
-                }
-            }
 
-            redis = ConnectionMultiplexer.Connect(options);
-            DB = redis.GetDatabase();
+            Client = ConnectionMultiplexer.Connect(options);
+            DB = Client.GetDatabase();
         }
-
-        public IDatabase DB { get; private set; }
     }
 }

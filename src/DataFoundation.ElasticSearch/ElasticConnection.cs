@@ -60,7 +60,7 @@ namespace DataFoundation.ElasticSearch
         //    this.index = index;
         //}
 
-        public ElasticConnection(string index, string elasticSearchConnectionString, string type = null)
+        public ElasticConnection(string index, string elasticSearchConnectionString = null, string type = null)
         {
             node = new Uri(elasticSearchConnectionString);
             var config = new ConnectionConfiguration(node);
