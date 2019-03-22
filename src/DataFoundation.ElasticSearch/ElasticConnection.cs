@@ -35,30 +35,20 @@ namespace DataFoundation.ElasticSearch
             var res = client.CreateIndex(req);
         }
 
-        public static ICatResponse<CatIndicesRecord> ListIndex(string elasticSearchConnectionString)
+        public async static Task<ICatResponse<CatIndicesRecord>> ListIndexAsync(string elasticSearchConnectionString)
         {
             var client = new Nest.ElasticClient(new Uri(elasticSearchConnectionString));
-            return client.CatIndices();
+            return await client.CatIndicesAsync();
         }
 
 
-        public static void DeleteIndex(string elasticSearchConnectionString, string index)
+        public async static Task<IDeleteIndexResponse> DeleteIndexAsync(string elasticSearchConnectionString, string index)
         {
             var req = new DeleteIndexRequest(index);
 
             var client = new Nest.ElasticClient(new Uri(elasticSearchConnectionString));
-            var res = client.DeleteIndex(req);
+            return await client.DeleteIndexAsync(req);
         }
-
-        //public ElasticConnection(string index)
-        //{
-        //    node = new Uri("http://127.0.0.1:9200");
-        //    var config = new ConnectionConfiguration(node);
-        //    LowClient = new ElasticLowLevelClient(config);
-        //    HighClient = new ElasticClient(node);
-
-        //    this.index = index;
-        //}
 
         public ElasticConnection(string index, string elasticSearchConnectionString = null, string type = null)
         {
