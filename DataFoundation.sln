@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{95434B6A-C435-4AAE-B2D5-394F95696243}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,6 +24,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{6872E328-8685-4C1B-A88B-F4A02A939AB3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisConnection", "sample\RedisConnection\RedisConnection.csproj", "{1B170C51-821E-4E02-AE66-4E976100C648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearchConnection", "sample\ElasticSearchConnection\ElasticSearchConnection.csproj", "{C6C53D80-600A-45D7-8405-5F8735077F52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,18 @@ Global
 		{1B170C51-821E-4E02-AE66-4E976100C648}.Release|x64.Build.0 = Release|Any CPU
 		{1B170C51-821E-4E02-AE66-4E976100C648}.Release|x86.ActiveCfg = Release|Any CPU
 		{1B170C51-821E-4E02-AE66-4E976100C648}.Release|x86.Build.0 = Release|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Debug|x64.Build.0 = Debug|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Debug|x86.Build.0 = Debug|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Release|x64.ActiveCfg = Release|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Release|x64.Build.0 = Release|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6C53D80-600A-45D7-8405-5F8735077F52}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +119,7 @@ Global
 		{7A7472BE-ED17-42DB-AD76-B9A3E2D61F1B} = {AA3AD24A-AD0E-42F9-9009-A9A0EE73F7FF}
 		{225B58D9-DF41-4EFC-AB35-EDB1612DC974} = {AA3AD24A-AD0E-42F9-9009-A9A0EE73F7FF}
 		{1B170C51-821E-4E02-AE66-4E976100C648} = {6872E328-8685-4C1B-A88B-F4A02A939AB3}
+		{C6C53D80-600A-45D7-8405-5F8735077F52} = {6872E328-8685-4C1B-A88B-F4A02A939AB3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCDA720A-82C4-4CB4-BF76-E58AB9C6DFA7}

@@ -52,22 +52,15 @@ namespace DataFoundation.ElasticSearch
 
         public ElasticConnection(string index, string elasticSearchConnectionString = null, string type = null)
         {
+            if (string.IsNullOrEmpty(elasticSearchConnectionString))
+                elasticSearchConnectionString = "http://127.0.0.1:9200";
+
             node = new Uri(elasticSearchConnectionString);
             var config = new ConnectionConfiguration(node);
             LowClient = new ElasticLowLevelClient(config);
             HighClient = new ElasticClient(node);
             this.index = index;
             this.type = type ?? index;
-        }
-
-        public void DeleteById(string id)
-        {
-            var doc = new Nest
-                .DocumentPath<dynamic>(new Nest.Id(id))
-                .Index(this.index)
-                .Type(this.type);
-
-            Nest.IDeleteResponse resp = this.HighClient.Delete<dynamic>(doc);
         }
 
         public async Task DeleteByIdAsync(string id)
@@ -79,6 +72,33 @@ namespace DataFoundation.ElasticSearch
                 .Type(this.type);
 
             Nest.IDeleteResponse resp = await this.HighClient.DeleteAsync<dynamic>(doc);
+        }
+
+        public async Task<IDeleteByQueryResponse> DeleteByAsync(string field, string equalsValue)
+        {
+            Log.Verbose($"Deleting elastic document with {field} = {equalsValue}");
+
+            var query = new QueryContainer(
+                new TermQuery
+                {
+                    Field = field,
+                    Value = equalsValue
+                });
+     
+            var doc = new Nest
+                .DocumentPath<dynamic>(query)
+                .Index(this.index)
+                .Type(this.type);
+
+            var resp = await this.HighClient.DeleteByQueryAsync<dynamic>(q => q
+                .Index(this.index)
+                .Type(this.type)
+                .Query(rq => rq
+                    .Term(field, equalsValue)
+                )
+            );
+
+            return resp;
         }
 
         public dynamic QueryAll(int limit = 10)
